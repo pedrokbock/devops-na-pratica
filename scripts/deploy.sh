@@ -1,9 +1,9 @@
 #!/bin/bash
 echo "=== Iniciando Deploy Continuo (CD) no Servidor EC2 ==="
 
-# 1. Baixar a ultima versão do container do registro (Simulado)
+# 1. Baixar a ultima versão do container do registro (MUDANÇA AQUI adicionando || true)
 echo "=> Executando Pull da imagem Docker mais recente..."
-docker pull pedrokbock/api-devops-pucrs:latest
+docker pull pedrokbock/api-devops-pucrs:latest || true
 
 # 2. Parar o container antigo para liberar a porta 80
 echo "=> Parando e removendo containers antigos ativos..."

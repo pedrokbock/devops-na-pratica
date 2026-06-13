@@ -1,4 +1,4 @@
-name: DevOps Pipeline - Fase 1
+name: DevOps Pipeline - Fase 2 (CI/CD)
 
 on:
   push:
@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout do código
       uses: actions/checkout@v4
@@ -21,3 +20,27 @@ jobs:
 
     - name: Executar testes automatizados
       run: npm test
+
+  delivery-and-deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
+    
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Simular Build da Imagem Docker
+      run: |
+        echo "Construindo imagem: docker build -t pedrokbock/api-devops-pucrs:latest ."
+        echo "Imagem Docker gerada com sucesso."
+
+    - name: Simular Push para o Docker Hub
+      run: |
+        echo "Autenticando no Docker Hub..."
+        echo "Enviando imagem estável para o registro público..."
+
+    - name: Executar Script de Deploy (CD)
+      run: |
+        chmod +x ./scripts/deploy.sh
+        ./scripts/deploy.sh

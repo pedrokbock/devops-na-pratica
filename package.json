@@ -2,6 +2,10 @@
   "name": "api-devops-pucrs",
   "version": "1.0.0",
   "scripts": {
+    "start": "node src/server.js",
     "test": "echo 'Sucesso: Testes unitarios executados com 100% de aprovacao!' && exit 0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }
